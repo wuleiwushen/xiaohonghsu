@@ -5,8 +5,8 @@ const sign = require('./origin_script')
 
 
 
-const main = async () => {
-  const userId = '55727cfbf5a2635fc1a9d345'
+module.exports = async ({url}) => {
+  const userId = url.match(/\/profile\/((.)*)$/)[1]
 
   const signLink = `/api/sns/web/v1/user_posted?num=30&cursor=&user_id=${userId}`
   const xst = await sign(signLink)
@@ -14,7 +14,7 @@ const main = async () => {
   const body = await request({
     url: `https://edith.xiaohongshu.com/api/sns/web/v1/user_posted?num=30&cursor=&user_id=${userId}`,
     headers: {
-      cookie: 'web_session=030037a4d73c84f2be0ebc2e9c244a7ed0a652;',
+      cookie: 'web_session=030037a4c4567605fab7fa5280244a183dbd47;',
       ...xst,
     },
     json: true,
@@ -22,5 +22,3 @@ const main = async () => {
 
   console.log(body);
 }
-
-main()
